@@ -1,4 +1,4 @@
-module github.com/go-openapi/validate
+module github.com/dadgar/validate
 
 go 1.18
 
@@ -10,6 +10,7 @@ require (
 	github.com/go-openapi/spec v0.20.9
 	github.com/go-openapi/strfmt v0.21.7
 	github.com/go-openapi/swag v0.22.4
+	github.com/go-openapi/validate v0.22.1
 	github.com/stretchr/testify v1.8.4
 	gopkg.in/yaml.v2 v2.4.0
 )
