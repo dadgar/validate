@@ -126,9 +126,6 @@ const (
 	// NoValidResponseError indicates that no valid response description could be found for an operation
 	NoValidResponseError = "operation %q has no valid response"
 
-	// PathOverlapError ...
-	PathOverlapError = "path %s overlaps with %s"
-
 	// PathParamNotInPathError indicates that a parameter specified with in: path was not found in the path specification
 	PathParamNotInPathError = "path param %q is not present in path %q"
 
@@ -165,9 +162,6 @@ const (
 
 	// ParamValidationTypeMismatch indicates that parameter has validation which does not match its type
 	ParamValidationTypeMismatch = "validation keywords of parameter %q in path %q don't match its type %s"
-
-	// PathStrippedParamGarbledWarning ...
-	PathStrippedParamGarbledWarning = "path stripped from path parameters %s contains {,} or white space. This is probably no what you want."
 
 	// ReadOnlyAndRequiredWarning ...
 	ReadOnlyAndRequiredWarning = "Required property %s in %q should not be marked as both required and readOnly"
@@ -244,12 +238,6 @@ func requiredButNotDefinedMsg(path, definition string) errors.Error {
 }
 func pathParamGarbledMsg(path, param string) errors.Error {
 	return errors.New(errors.CompositeErrorCode, PathParamGarbledWarning, path, param)
-}
-func pathStrippedParamGarbledMsg(path string) errors.Error {
-	return errors.New(errors.CompositeErrorCode, PathStrippedParamGarbledWarning, path)
-}
-func pathOverlapMsg(path, arg string) errors.Error {
-	return errors.New(errors.CompositeErrorCode, PathOverlapError, path, arg)
 }
 func invalidPatternInParamMsg(operation, param, pattern string) errors.Error {
 	return errors.New(errors.CompositeErrorCode, InvalidPatternInParamError, operation, param, pattern)

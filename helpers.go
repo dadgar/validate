@@ -119,24 +119,6 @@ type pathHelper struct {
 	// A collection of unexported helpers for path validation
 }
 
-func (h *pathHelper) stripParametersInPath(path string) string {
-	// Returns a path stripped from all path parameters, with multiple or trailing slashes removed.
-	//
-	// Stripping is performed on a slash-separated basis, e.g '/a{/b}' remains a{/b} and not /a.
-	//  - Trailing "/" make a difference, e.g. /a/ !~ /a (ex: canary/bitbucket.org/swagger.json)
-	//  - presence or absence of a parameter makes a difference, e.g. /a/{log} !~ /a/ (ex: canary/kubernetes/swagger.json)
-
-	// Regexp to extract parameters from path, with surrounding {}.
-	// NOTE: important non-greedy modifier
-	rexParsePathParam := mustCompileRegexp(`{[^{}]+?}`)
-	strippedSegments := []string{}
-
-	for _, segment := range strings.Split(path, "/") {
-		strippedSegments = append(strippedSegments, rexParsePathParam.ReplaceAllString(segment, "X"))
-	}
-	return strings.Join(strippedSegments, "/")
-}
-
 func (h *pathHelper) extractPathParams(path string) (params []string) {
 	// Extracts all params from a path, with surrounding "{}"
 	rexParsePathParam := mustCompileRegexp(`{[^{}]+?}`)

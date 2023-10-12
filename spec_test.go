@@ -443,14 +443,6 @@ func TestSpec_ValidateParameters(t *testing.T) {
 	pp.Parameters = nameParams
 	sw.Paths.Paths["/pets/{name}"] = pp
 
-	validator = NewSpecValidator(spec.MustLoadSwagger20Schema(), strfmt.Default)
-	validator.spec = doc
-	validator.analyzer = analysis.New(doc.Spec())
-	res = validator.validateParameters()
-	assert.NotEmpty(t, res.Errors)
-	assert.Len(t, res.Errors, 1)
-	assert.Contains(t, res.Errors[0].Error(), "overlaps with")
-
 	doc, _ = loads.Analyzed(PetStoreJSONMessage, "")
 	validator = NewSpecValidator(spec.MustLoadSwagger20Schema(), strfmt.Default)
 	validator.spec = doc
